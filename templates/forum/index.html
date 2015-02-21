@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Proste Forum</title>
+    <link rel="stylesheet" href="http://bootswatch.com/darkly/bootstrap.min.css">
+
+</head>
+<body>
+     <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#"></a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Index</a></li>
+                    <li><a href="#">Index2</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+
+<h2>Index</h2>
+
+<p>
+    <a href="./topic/new" class="btn btn-default">Nowy temat</a>
+</p>
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            Id
+        </th>
+        <th>
+            Temat
+        </th>
+        <th>
+            Tresc
+        </th>
+        <th>
+            Data
+        </th>
+        <th>Uzytkownik</th>
+    </tr>
+
+{% for topic in topics %}
+    <tr>
+        <td>
+            {{ topic.id }}
+        </td>
+        <td>
+            <a href="/topic/{{ topic.id }}" class="btn btn-default btn-block">{{ topic.title }}</a>
+        </td>
+        <td>
+            {{ topic.description }}
+        </td>
+        <td>
+            {{ topic.created }}
+        </td>
+        <td>
+            {{ topic.creator }}
+        </td>
+    </tr>
+{% endfor %}
+
+</table>
+        <footer>
+            <p>&copy; {% now "Y" %} Szymon Salachna, Marcin Lison PPP & PAI Project</p>
+        </footer>
+    </div>
+
+</body>
+</html>
