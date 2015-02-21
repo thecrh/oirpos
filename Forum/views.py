@@ -36,28 +36,18 @@ def new(request):
         return redirect('/')
     else:
         form = TopicForm
-    return render(request, 'forum/newtopic.html', {'form': form})
+        return render(request, 'forum/newtopic.html', {'form': form})
 
 
 def reply(request, topic_id):
-    return render(request, 'forum/reply.html', {'topic_id': topic_id})
-
-
-def new_topic(request):
-    if request.method == 'GET':
-        form = TopicForm()
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        print topic_id
+        tmppost = form.save(commit=False)
+        tmppost.creator = User.objects.get(username='windoo')  # do poprawki dodac logowanie
+        tmppost.topic = Topic.objects.get(id=topic_id)
+        tmppost.save()
+        return redirect('/topic/' + topic_id + '/')
     else:
-        # A POST request: Handle Form Upload
-        # Bind data from request.POST into a PostForm
-        form = TopicForm(request.POST)
-        # If data is valid, proceeds to create a new post and redirect the user
-        if form.is_valid():
-            content = form.cleaned_data['content']
-            created_at = form.cleaned_data['created_at']
-            tmp_topic = m.Topic.objects.create(content=content, created_at=created_at)
-            return HttpResponseRedirect(reverse('post_detail', kwargs={'topic_id': topic.id}))
-
-    return render(request, '/forum/newtopic.html', {
-        'form': form,
-    })
-
+        form = PostForm
+        return render(request, 'forum/reply.html', {'topic_id': topic_id, 'form': form})

@@ -4,8 +4,11 @@ from django import forms
 from Forum.models import *
 
 
-class ReplyForm(forms.Form):
-    content = forms.CharField(max_length=10000)
+class PostForm(forms.ModelForm):
+
+    class Meta():
+        model = Post
+        fields = ('title', 'body')
 
 
 class TopicForm(forms.ModelForm):

@@ -20,5 +20,5 @@ urlpatterns = patterns('',
     # /topic/new
     url(r'^topic/new/$', 'Forum.views.new', name='TopicForm'),
     # /topic/{id}/reply/
-    url(r'^topic/(?P<topic_id>\d+)/reply/$', 'Forum.views.reply'),
+    url(r'^topic/(?P<topic_id>\d+)/reply/$', 'Forum.views.reply', name='ReplyForm'),
 )
