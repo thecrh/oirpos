@@ -16,12 +16,13 @@ def test(request):
 def forum(request):
     """Forum listing."""
     topics = Topic.objects.all().order_by('created')
-    return render(request, 'forum/index.html', {'topics': topics})
+    return render(request, 'forum/forum.html', {'topics': topics})
 
 
 def topic(request, topic_id):
-    return HttpResponse("You're looking at question %s." % topic_id)
-    return render_to_response()
+    topics = Topic.objects.get(id=topic_id)
+    posts = Post.objects.all().filter(topic=topic_id)
+    return render(request, 'forum/topic.html', {'topics': topics, 'posts': posts})
 
 
 def new(request):
