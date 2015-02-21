@@ -11,14 +11,15 @@ from django.shortcuts import redirect
 # Create your views here.
 
 
-def test(request):
-    return render_to_response('test.html', {'imie': 'Piotr', 'framework': 'django'})
-
-
 def forum(request):
     """Forum listing."""
     topics = Topic.objects.all().order_by('created')
     return render(request, 'forum/forum.html', {'topics': topics})
+
+
+def about(request):
+    """About listing"""
+    return render(request, 'forum/about.html')
 
 
 def topic(request, topic_id):
