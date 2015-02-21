@@ -10,9 +10,9 @@ class ReplyForm(forms.Form):
 
 class TopicForm(forms.ModelForm):
 
-    title = forms.CharField(max_length=60, required=True)
-    description = forms.CharField(max_length=10000, required=True)
+    # title = forms.CharField(max_length=60, required=True)
+    # description = forms.CharField(max_length=10000, required=True)
 
     class Meta():
         model = Topic
-        exclude = ('creator','updated', 'created', 'closed',)
+        fields = ('title', 'description')

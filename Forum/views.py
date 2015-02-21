@@ -6,6 +6,8 @@ from django.http import HttpResponse
 from Forum.forms import *
 from Forum import models as m
 from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
+
 # Create your views here.
 
 
@@ -26,7 +28,14 @@ def topic(request, topic_id):
 
 
 def new(request):
-    form = TopicForm
+    if request.method == 'POST':
+        form = TopicForm(request.POST)
+        tmptopic = form.save(commit=False)
+        tmptopic.creator = User.objects.get(username='windoo')  # do poprawki dodac logowanie
+        tmptopic.save()
+        return redirect('/')
+    else:
+        form = TopicForm
     return render(request, 'forum/newtopic.html', {'form': form})
 
 
