@@ -1,0 +1,8 @@
+{% extends 'forum/index.html' %}
+{% block content %}
+<h2>{{ topic.title }}</h2>
+<form id="form" action='/topic/{{ topic.id }}/reply/' method='post'>{% csrf_token %}
+{{ form.as_p }}
+<input type='submit' value='Submit' />
+</form>
+{% endblock %}

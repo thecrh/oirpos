@@ -1,0 +1,22 @@
+{% extends 'forum/index.html' %}
+{% block content %}
+<center>
+<h2>Rejestracja</h2>
+Logowanie jest wymagane, aby móc dodawać nowe tematy oraz odpowiadać innym użytkonikom.
+<p>
+<div style="margin-left:35%;margin-right:35%;">
+<fieldset>
+  <legend> Wszystkie pola są wymagane</legend>
+    <form method="post" action=".">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Rejestracja">
+  </form>
+</fieldset>
+</div>
+</center>
+{% endblock %}
+{% block footer %}
+<p>
+<div style="text-align:center;"><a href="/">Strona główna</a></div>
+</p>
+{% endblock %}

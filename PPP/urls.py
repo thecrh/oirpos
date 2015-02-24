@@ -24,4 +24,10 @@ urlpatterns = patterns('',
     url(r'^topic/(?P<topic_id>\d+)/reply/$', 'Forum.views.reply', name='ReplyForm'),
     # /about/
     url(r'^about/', 'Forum.views.about'),
+    #login
+    (r'^login/$','django.contrib.auth.views.login'),
+    #logout
+    (r'^logout/$',logout_page),
+    #register
+    (r'^register/$',register_page)
 )

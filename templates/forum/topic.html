@@ -1,0 +1,48 @@
+{% extends 'forum/index.html' %}
+
+{% block content %}
+    <br />
+<h2>{{ topics.title }}</h2>
+<p>{{ topics.description }}</p>
+<p>{{ topics.creator.get_username }}</p>
+
+
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            Temat
+        </th>
+        <th>
+            Treść
+        </th>
+        <th>
+            Data
+        </th>
+        <th>Autor</th>
+    </tr>
+
+{% for post in posts %}
+    <tr>
+        <td>
+            {{ post.title }}
+        </td>
+        <td>
+            {{ post.body }}
+        </td>
+        <td>
+            {{ post.created }}
+        </td>
+        <td>
+            {{ post.creator }}
+        </td>
+    </tr>
+{% endfor %}
+
+</table>
+
+{% if user.is_authenticated %}
+<p>
+    <a href="/topic/{{ topics.id }}/reply/" class="btn btn-default">Odpowiedz</a>
+</p>
+{% endif %}
+{% endblock %}
